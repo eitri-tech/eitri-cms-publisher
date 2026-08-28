@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Eitri CMS Publisher</title>
+    <link rel="stylesheet" href="panel.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <img class="logo" src="icons/icon48.png" alt="" width="22" height="22" />
+        <h1>Eitri CMS Publisher</h1>
+      </div>
+      <span id="status-pill" class="pill pill-warn">verificando…</span>
+    </header>
+
+    <section id="not-supported" class="hidden">
+      <p class="warn">
+        Abra esta extensão em uma aba do editor VTEX CMS
+        (<code>.../admin/(app/)new-cms/&lt;builder&gt;/&lt;page&gt;/edit/&lt;id&gt;</code>).
+      </p>
+    </section>
+
+    <section id="main-content" class="hidden">
+      <fieldset>
+        <legend>Página detectada</legend>
+        <label>builderId <input id="builderId" type="text" /></label>
+        <label>pageType <input id="pageType" type="text" /></label>
+        <label>documentId <input id="documentId" type="text" /></label>
+        <label>documentVersionId <input id="documentVersionId" type="text" /></label>
+        <div class="row">
+          <button id="reload-sync" type="button">Recarregar página &amp; sincronizar</button>
+          <span id="capture-info" class="hint"></span>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Sections atuais capturadas (<span id="current-count">0</span>)</legend>
+        <ol id="current-list" class="section-list"></ol>
+        <div class="row export-row">
+          <button id="export-json" type="button" disabled>Copiar JSON</button>
+          <span id="export-feedback" class="hint"></span>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>JSON de entrada</legend>
+        <textarea
+          id="json-input"
+          rows="10"
+          placeholder='Array de sections, ex: [{"name":"AnnouncementBar","data":{...}}]  ou  {"sections":[...]}'
+        ></textarea>
+        <div id="json-error" class="error hidden"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Modo</legend>
+        <label class="radio">
+          <input type="radio" name="mode" value="REPLACE" checked />
+          REPLACE — substitui todas as sections atuais pelo JSON de entrada
+        </label>
+        <label class="radio">
+          <input type="radio" name="mode" value="ADD" />
+          ADD — anexa o JSON de entrada ao final das sections atuais
+        </label>
+      </fieldset>
+
+      <button id="apply" type="button" class="primary">Aplicar no CMS</button>
+
+      <fieldset>
+        <legend>Log</legend>
+        <pre id="log">—</pre>
+      </fieldset>
+    </section>
+
+    <script src="panel.js"></script>
+  </body>
+</html>
