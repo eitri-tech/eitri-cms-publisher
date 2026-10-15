@@ -21,7 +21,7 @@ Extensão Chrome (Manifest V3) para publicar e exportar sections no VTEX CMS (`v
 
 ## Atualizar
 
-No topo do painel, clique em **"Verificar atualização"**. Se houver release novo, clique em **"Atualizar agora"**: na primeira vez, selecione a pasta onde a extensão está carregada (a que contém o `manifest.json`); a extensão baixa o zip do release, sobrescreve os arquivos e se recarrega sozinha.
+Ao abrir o painel, a extensão verifica automaticamente se há release novo. Se houver, um aviso discreto aparece no topo; clique em **"Atualizar"**: na primeira vez, selecione a pasta onde a extensão está carregada (a que contém o `manifest.json`); a extensão baixa o zip do release, sobrescreve os arquivos e se recarrega sozinha.
 
 ## Publicar uma versão (mantenedores)
 

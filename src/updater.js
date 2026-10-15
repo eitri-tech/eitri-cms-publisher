@@ -5,7 +5,7 @@ var UPDATE_DB = 'eitri-cms-publisher';
 var UPDATE_STORE = 'handles';
 
 var upd = {
-  btnCheck: document.getElementById('update-check'),
+  banner: document.getElementById('update-banner'),
   btnApply: document.getElementById('update-apply'),
   msg: document.getElementById('update-msg'),
   link: document.getElementById('update-link'),
@@ -155,11 +155,8 @@ function writeFileAt(root, path, data) {
     .then(function (w) { return w.write(data).then(function () { return w.close(); }); });
 }
 
+// Runs silently on open: the banner only appears when a newer release exists.
 function checkForUpdate() {
-  upd.btnCheck.disabled = true;
-  upd.link.classList.add('hidden');
-  upd.btnApply.classList.add('hidden');
-  setUpdateMsg('verificando…');
   return fetch('https://api.github.com/repos/' + UPDATE_REPO + '/releases/latest', {
     headers: { Accept: 'application/vnd.github+json' },
   })
@@ -169,20 +166,13 @@ function checkForUpdate() {
     })
     .then(function (rel) {
       var current = chrome.runtime.getManifest().version;
-      if (!isNewer(rel.tag_name, current)) {
-        setUpdateMsg('Você está na versão mais recente (' + current + ').');
-        return;
-      }
+      if (!isNewer(rel.tag_name, current)) return;
       latestRelease = rel;
-      setUpdateMsg('Nova versão disponível: ' + rel.tag_name + ' (atual: ' + current + ').');
+      setUpdateMsg('Nova versão ' + rel.tag_name + ' disponível.');
       upd.link.href = rel.html_url;
-      upd.link.classList.remove('hidden');
-      upd.btnApply.classList.remove('hidden');
+      upd.banner.classList.remove('hidden');
     })
-    .catch(function (e) {
-      setUpdateMsg('Erro ao verificar: ' + e.message);
-    })
-    .then(function () { upd.btnCheck.disabled = false; });
+    .catch(function () {});
 }
 
 function applyUpdate() {
@@ -237,6 +227,6 @@ function applyUpdate() {
     });
 }
 
-upd.btnCheck.addEventListener('click', checkForUpdate);
 upd.btnApply.addEventListener('click', applyUpdate);
 document.getElementById('update-version').textContent = 'v' + chrome.runtime.getManifest().version;
+checkForUpdate();

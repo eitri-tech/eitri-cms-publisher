@@ -9,19 +9,15 @@
     <header>
       <div class="brand">
         <img class="logo" src="icons/icon48.png" alt="" width="22" height="22" />
-        <h1>Eitri CMS Publisher</h1>
+        <h1>Eitri CMS Publisher <span id="update-version" class="version"></span></h1>
       </div>
       <span id="status-pill" class="pill pill-warn">verificando…</span>
     </header>
 
-    <fieldset class="update">
-      <legend>Atualização <span id="update-version"></span></legend>
-      <div class="row">
-        <button id="update-check" type="button">Verificar atualização</button>
-        <button id="update-apply" type="button" class="primary hidden">Atualizar agora</button>
-      </div>
-      <div class="hint"><span id="update-msg"></span> <a id="update-link" class="hidden" href="#" target="_blank" rel="noopener">ver release</a></div>
-    </fieldset>
+    <div id="update-banner" class="update-banner hidden">
+      <span><span id="update-msg"></span> <a id="update-link" href="#" target="_blank" rel="noopener">ver release</a></span>
+      <button id="update-apply" type="button" class="primary">Atualizar</button>
+    </div>
 
     <section id="not-supported" class="hidden">
       <p class="warn">
