@@ -35,6 +35,12 @@ panel reaches the page exclusively through `chrome.scripting.executeScript({ wor
 - [panel.html](panel.html) / [panel.css](panel.css) / [panel.js](panel.js) — side panel UI:
   reads state from the page, lists sections, exports JSON to clipboard, validates pasted JSON,
   builds the publish payload, and invokes the apply function.
+- [src/updater.js](src/updater.js) — side panel updater: checks the latest GitHub release, downloads the
+  zip, and overwrites the user-authorized extension folder (File System Access API, handle kept in
+  IndexedDB), then `chrome.runtime.reload()`. Keep `getWritableDir()` called directly from the click
+  handler (needs user activation) and the `verifyExtensionDir` check.
+- [.github/workflows/release.yml](.github/workflows/release.yml) — a pushed tag (`1.2.0`/`v1.2.0`)
+  must equal `manifest.json` version; it builds the zip and creates the release.
 - [icons/](icons/) — icons only.
 
 ## Non-obvious invariants
@@ -73,7 +79,8 @@ These are the things that silently break. Preserve them.
 
 ## Security boundaries
 
-- Host permission is intentionally scoped to `*.myvtex.com`. Do not broaden it.
+- Host permissions are `*.myvtex.com` plus `api.github.com`, `github.com` and `*.githubusercontent.com`,
+  the latter three only for the self-updater ([src/updater.js](src/updater.js)). Do not broaden further.
 - Captured data (documentId, sections, …) must never leave the browser tab. The only network
   call is the publish mutation, issued by the page itself so its cookies apply automatically —
   do not add extension-side requests that carry cookies or tokens separately.

@@ -146,3 +146,6 @@ pre#log {
 
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.update .row { flex-wrap: wrap; }
+.update a { color: var(--lime); }

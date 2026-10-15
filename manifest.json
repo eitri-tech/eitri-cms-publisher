@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Eitri CMS Publisher",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Aplica um JSON de sections (REPLACE ou ADD) direto na página do editor VTEX CMS aberta na aba atual.",
   "action": {
     "default_title": "Eitri CMS Publisher",
@@ -19,7 +19,12 @@
     "128": "icons/icon128.png"
   },
   "permissions": ["activeTab", "tabs", "storage", "scripting", "sidePanel"],
-  "host_permissions": ["*://*.myvtex.com/*"],
+  "host_permissions": [
+    "*://*.myvtex.com/*",
+    "https://api.github.com/*",
+    "https://github.com/*",
+    "https://*.githubusercontent.com/*"
+  ],
   "side_panel": {
     "default_path": "panel.html"
   },

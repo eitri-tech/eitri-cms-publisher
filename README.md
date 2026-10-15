@@ -19,6 +19,14 @@ Extensão Chrome (Manifest V3) para publicar e exportar sections no VTEX CMS (`v
 3. Clique em "Carregar sem compactação" e selecione esta pasta (`eitri-cms-publisher`).
 4. Abra (ou recarregue) a aba do editor VTEX CMS que você quer publicar.
 
+## Atualizar
+
+No topo do painel, clique em **"Verificar atualização"**. Se houver release novo, clique em **"Atualizar agora"**: na primeira vez, selecione a pasta onde a extensão está carregada (a que contém o `manifest.json`); a extensão baixa o zip do release, sobrescreve os arquivos e se recarrega sozinha.
+
+## Publicar uma versão (mantenedores)
+
+Suba a versão em `manifest.json`, faça commit/push e então `git tag X.Y.Z && git push origin X.Y.Z`. O GitHub Actions valida a tag contra o manifest e cria o release com o zip.
+
 ## Usar
 
 1. Com a aba do editor aberta, clique no ícone da extensão — o painel lateral abre à direita. Ele permanece aberto mesmo que você interaja com a página.
